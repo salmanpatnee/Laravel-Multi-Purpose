@@ -6,3 +6,22 @@
 
 // Bootstrap
 @import '~bootstrap/scss/bootstrap';
+
+
+.sidebar li a.router-link-exact-active {
+    color: #fff;
+    font-weight: bold;
+}
+
+.content-wrapper>.content {
+    padding: 2em .5rem;
+}
+
+.card-header {
+    background-color: #fff;
+    padding: 0.75rem 1.25rem;
+}
+
+.card-title {
+    margin-bottom: 0;
+}

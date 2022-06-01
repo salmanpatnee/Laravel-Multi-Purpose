@@ -11286,3 +11286,20 @@ textarea.form-control-lg {
     display: none !important;
   }
 }
+.sidebar li a.router-link-exact-active {
+  color: #fff;
+  font-weight: bold;
+}
+
+.content-wrapper > .content {
+  padding: 2em 0.5rem;
+}
+
+.card-header {
+  background-color: #fff;
+  padding: 0.75rem 1.25rem;
+}
+
+.card-title {
+  margin-bottom: 0;
+}

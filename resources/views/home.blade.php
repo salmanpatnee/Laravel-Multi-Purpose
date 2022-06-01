@@ -2,12 +2,11 @@
 
 @section('title', 'Dashboard')
 
-@section('content_header')
+{{-- @section('content_header')
     <h1>Dashboard</h1>
-@stop
+@stop --}}
 
 @section('content')
-    <p>Welcome to this beautiful admin panel.</p>
 @stop
 
 @section('css')
@@ -15,7 +14,9 @@
 @stop
 
 @section('js')
-    <script> console.log('Hi!'); </script>
+    <script>
+        console.log('Hi!');
+    </script>
 @stop
 
 {{-- @extends('layouts.app')
