@@ -23,6 +23,8 @@
         <div class="{{ config('adminlte.classes_content') ?: $def_container_class }}">
             <router-view></router-view>
             @yield('content')
+            <!-- set progressbar -->
+            <vue-progress-bar></vue-progress-bar>
         </div>
     </div>
 
