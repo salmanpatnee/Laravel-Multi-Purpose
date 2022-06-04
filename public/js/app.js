@@ -5395,6 +5395,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       users: {},
       editMode: false,
       form: new Form({
+        id: '',
         name: '',
         email: '',
         password: ''
@@ -5491,23 +5492,39 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       }))();
     },
     update: function update() {
-      console.log('Updated');
+      var _this3 = this;
+
+      this.$Progress.start();
+      this.form.put('/api/users/' + this.form.id).then(function () {
+        Fire.$emit('refreshUsers');
+        $('#user-modal').modal('hide');
+        Toast.fire({
+          icon: 'success',
+          title: 'User updated successfully'
+        });
+
+        _this3.$Progress.finish();
+      })["catch"](function (error) {
+        _this3.$Progress.fail();
+
+        console.log('Error', error);
+      });
     },
     getUsers: function getUsers() {
-      var _this3 = this;
+      var _this4 = this;
 
       this.form.get('/api/users').then(function (_ref) {
         var data = _ref.data;
-        return _this3.users = data.data;
+        return _this4.users = data.data;
       });
     }
   },
   created: function created() {
-    var _this4 = this;
+    var _this5 = this;
 
     this.getUsers();
     Fire.$on('refreshUsers', function () {
-      _this4.getUsers();
+      _this5.getUsers();
     });
   }
 });

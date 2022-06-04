@@ -84,6 +84,7 @@ export default {
       users: {},
       editMode: false,
       form: new Form({
+         id: '',
          name: '',
          email: '',
          password: '',
@@ -100,7 +101,6 @@ export default {
          this.editMode = true;
          this.form.reset();
          this.form.fill(user);
-
          $('#user-modal').modal('show');
       },
       hideModal(modalId) {
@@ -140,8 +140,6 @@ export default {
          })
       },
       async store() {
-
-
          this.$Progress.start();
          await this.form.post('/api/users').then(() => {
             Fire.$emit('refreshUsers');
@@ -158,10 +156,23 @@ export default {
             console.log('Error', error);
          });
 
-
       },
       update() {
-         console.log('Updated');
+         this.$Progress.start();
+         this.form.put('/api/users/' + this.form.id).then(() => {
+            Fire.$emit('refreshUsers');
+
+            $('#user-modal').modal('hide');
+
+            Toast.fire({
+               icon: 'success',
+               title: 'User updated successfully'
+            });
+            this.$Progress.finish();
+         }).catch((error) => {
+            this.$Progress.fail();
+            console.log('Error', error);
+         });
       },
       getUsers() {
          this.form.get('/api/users').then(({ data }) => (this.users = data.data));
