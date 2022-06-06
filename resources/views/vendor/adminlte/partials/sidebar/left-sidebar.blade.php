@@ -27,6 +27,12 @@
                         <p>&nbsp;Users</p>
                     </router-link>
                 </li>
+                <li class="nav-item">
+                    <router-link to="/profile" class="nav-link">
+                        <i class="far fas fa-address-card "></i>
+                        <p>&nbsp;Profile</p>
+                    </router-link>
+                </li>
 
                 {{-- @each('adminlte::partials.sidebar.menu-item', $adminlte->menu('sidebar'), 'item') --}}
             </ul>

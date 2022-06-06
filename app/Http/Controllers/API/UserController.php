@@ -64,7 +64,7 @@ class UserController extends Controller
         $validated = $request->validate([
             'name'     => 'required|string|max:255',
             'email'    => ['required', 'email', 'max:255', Rule::unique('users')->ignore($user->id)],
-            'password' => 'sometimes|string|min:6',
+            'password' => 'sometimesp|string|min:6',
         ]);
 
         return $user->update($validated);
@@ -81,5 +81,20 @@ class UserController extends Controller
         $user->delete();
 
         return true;
+    }
+
+    public function profile()
+    {
+        return auth()->user();
+    }
+
+    public function updateProfile(Request $request)
+    {
+        return $request;
+
+        if ($request->hasFile('image')) {
+            return ['status', 'Yes'];
+        }
+        return  ['status', 'No'];
     }
 }

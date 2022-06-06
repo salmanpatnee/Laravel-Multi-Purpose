@@ -24,4 +24,6 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 
 Route::prefix('api')->group(function () {
     Route::apiResource('users', UserController::class);
+    Route::get('user/profile', [UserController::class, 'profile'])->name('profile.show');
+    Route::put('user/profile', [UserController::class, 'updateProfile'])->name('profile.update');
 });

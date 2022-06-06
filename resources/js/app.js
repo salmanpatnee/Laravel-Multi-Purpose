@@ -5,6 +5,7 @@
  */
 
 require('./bootstrap');
+import Vue from 'vue';
 window.Vue = require('vue').default;
 import VueRouter from 'vue-router'
 import { Form } from 'vform';
@@ -15,7 +16,8 @@ import Swal from 'sweetalert2';
 import { Button, HasError, AlertError, AlertErrors, AlertSuccess } from 'vform/src/components/bootstrap4';
 import DashboardComponent from './components/DashboardComponent';
 import UsersComponent from './components/UsersComponent';
-import Vue from 'vue';
+import ProfileComponent from './components/ProfileComponent';
+
 
 Vue.use(VueRouter);
 Vue.use(VueProgressBar, {
@@ -54,7 +56,8 @@ window.Toast = Toast;
 
 const routes = [
     { path: '/dashboard', component: DashboardComponent },
-    { path: '/users', component: UsersComponent }
+    { path: '/users', component: UsersComponent },
+    { path: '/profile', component: ProfileComponent }
 ];
 
 const router = new VueRouter({
