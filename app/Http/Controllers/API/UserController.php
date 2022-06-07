@@ -8,6 +8,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rule;
 
+use function PHPUnit\Framework\fileExists;
+
 class UserController extends Controller
 {
     /**
@@ -64,7 +66,7 @@ class UserController extends Controller
         $validated = $request->validate([
             'name'     => 'required|string|max:255',
             'email'    => ['required', 'email', 'max:255', Rule::unique('users')->ignore($user->id)],
-            'password' => 'sometimesp|string|min:6',
+            'password' => 'sometimes|string|min:6',
         ]);
 
         return $user->update($validated);
@@ -90,11 +92,26 @@ class UserController extends Controller
 
     public function updateProfile(Request $request)
     {
-        return $request;
+        $user = auth()->user();
 
-        if ($request->hasFile('image')) {
-            return ['status', 'Yes'];
+        $request->validate([
+            'name'     => 'required|string|max:255',
+            'email'    => ['required', 'email', 'max:255', Rule::unique('users')->ignore($user->id)],
+            'password' => 'sometimes|required|string|min:6',
+        ]);
+
+        if ($request->image != $user->image) {
+
+            $name = time() . '.' . explode('/', explode(':', substr($request->image, 0, strpos($request->image, ';')))[1])[1];
+
+            \Image::make($request->image)->save(public_path('img/profile/') . $name);
+
+            $request->merge(['image' => $name]);
+
+            $oldImage = public_path('img/profile/') . $user->image;
+            if (fileExists($oldImage)) @unlink($oldImage);
         }
-        return  ['status', 'No'];
+
+        return $user->update($request->all());
     }
 }

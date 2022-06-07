@@ -13,10 +13,12 @@ import Moment from 'moment';
 import VueProgressBar from 'vue-progressbar'
 import Swal from 'sweetalert2';
 
+
 import { Button, HasError, AlertError, AlertErrors, AlertSuccess } from 'vform/src/components/bootstrap4';
 import DashboardComponent from './components/DashboardComponent';
 import UsersComponent from './components/UsersComponent';
 import ProfileComponent from './components/ProfileComponent';
+
 
 
 Vue.use(VueRouter);
@@ -30,6 +32,7 @@ Vue.component(Button.name, Button)
 Vue.component(HasError.name, HasError)
 Vue.component(AlertError.name, AlertError)
 Vue.component(AlertErrors.name, AlertErrors)
+Vue.component(AlertSuccess.name, AlertSuccess)
 Vue.component(AlertSuccess.name, AlertSuccess)
 
 Vue.filter('formatteddDate', function (date) {
